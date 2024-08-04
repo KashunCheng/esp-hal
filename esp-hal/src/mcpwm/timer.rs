@@ -63,6 +63,10 @@ impl<const TIM: u8, PWM: PwmPeripheral> Timer<TIM, PWM> {
         });
     }
 
+    pub unsafe fn set_prescale(&mut self, prescale: u8) {
+        self.cfg0().write(|w| w.prescale().bits(prescale));
+    }
+
     /// Stop the timer in its current state
     pub fn stop(&mut self) {
         // freeze the timer
